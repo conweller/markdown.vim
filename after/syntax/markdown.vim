@@ -4,7 +4,6 @@ syn sync minlines=100
 syn sync maxlines=200
 
 
-
 syn match mdTodo  /\c\(TODO\|FIXME\|XXX\)/
 syn match mdLinkPath  /](\zs.*\ze)/ contains=@NoSpell
 syn match mdLinkText  /\[\zs[^\[(\]]*\n*[^\[(\]]*\ze\](/
