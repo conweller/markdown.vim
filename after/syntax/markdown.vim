@@ -16,7 +16,7 @@ syn match mdDefOperator  /^\s*:\s/ contained
 
 syn match mdEmphOperator contained /\\\@<!\*/
 
-syn region mdComment start=/^\s*<!--\s\=/ end=/\s\=-->/  keepend  contains=mdTodo
+syn region mdComment start=/^\s*\\\@<!<!--\s\=/ end=/\s\=-->/  keepend  contains=mdTodo
 
 syn region mdCode start=/\\\@<!`/ end=/\\\@<!`/  keepend contains=@NoSpell
 syn region mdCodeBlock start=/\\\@<!```/ end=/\\\@<!```/  keepend contains=@NoSpell
@@ -32,13 +32,13 @@ syn match mdHeaderSymbol  contained /#/
 
 
 syn match mdMathWord contained /\w/ contains=@NoSpell
-syn match mdMathKeyWord contained /\\\w*/ contains=@NoSpell
+syn match mdMathKeyWord contained /\\\S*/ contains=@NoSpell
 syn region mdMath start=/\\\@<!\$/ end=/\\\@<!\$/ keepend contains=@NoSpell,mdMathWord,mdMathKeyWord
 syn region mdMathBlock start=/\\\@<!\$\$/ end=/\\\@<!\$\$/ keepend contains=@NoSpell,mdMathWord,mdMathKeyWord
 
 
 
-syn region mdFrontmatter start=/\%1l---\+$/ end=/^---\+$/ keepend contains=@NoSpell
+syn region mdFrontmatter start=/\%1l^---\+$/ end=/^---\+$/ keepend contains=@NoSpell
 syn match mdBlockquote  /^\s*\\\@<!>.*$/
 
 
