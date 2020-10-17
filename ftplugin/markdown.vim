@@ -1,0 +1,14 @@
+setlocal commentstring=<!--%s-->
+setlocal formatoptions=ljnq
+setlocal comments=b:>,bf::,bf:-,bf:*,bf:+,bf:a.,bf:b.,bf:c.,bf:d.,bf:e.,bf:f.,bf:g.,bf:h.,bf:i.,bf:j.,bf:k.,bf:l.,bf:m.,bf:n.,bf:o.,bf:p.,bf:q.,bf:r.,bf:s.,bf:t.,bf:u.,bf:v.,bf:w.,bf:x.,bf:y.,bf:z.,bf:A.,bf:B.,bf:C.,bf:D.,bf:E.,bf:F.,bf:G.,bf:H.,bf:I.,bf:J.,bf:K.,bf:L.,bf:M.,bf:N.,bf:O.,bf:P.,bf:Q.,bf:R.,bf:S.,bf:T.,bf:U.,bf:V.,bf:W.,bf:X.,bf:Y.,bf:Z.,bf:0.,bf:1.,bf:2.,bf:3.,bf:4.,bf:5.,bf:6.,bf:7.,bf:8.,bf:9.
+setlocal foldexpr=MarkdownLevel()
+setlocal foldmethod=expr
+setlocal shiftwidth=4
+setlocal softtabstop=4
+setlocal tabstop=4
+setlocal iskeyword-=-
+setlocal textwidth=72
+setlocal wrapmargin=0
+setlocal iskeyword-=$
+setlocal breakindent
+setlocal lbr
