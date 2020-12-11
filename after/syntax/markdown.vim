@@ -53,10 +53,12 @@ syn match mdHeaderSymbol  contained /#/
 syn region mdMath start=/\\\@<!\$/ end=/\\\@<!\$/ keepend contains=mdBlockquote,mdMathDelim,mdMathBold
 syn region mdMathBlock start=/\\\@<!\$\$/ end=/\\\@<!\$\$/ keepend contains=mdBlockquote,mdMathDelim,mdMathBold
 syn region mdCodeMathBlock start=/\\\@<!```{=tex}/  end=/\\\@<!```/ keepend contains=mdBlockquote,mdMathDelim,mdMathBold
-syn match mdCodeDelim /\\\@<!\`\+\(\s\+.*\)\=/ contained conceal
+syn match mdMathDelim /\\\@<!\$/ conceal contained
 
 syn region mdCode start=/\\\@<!`/ end=/\\\@<!`/  keepend contains=@NoSpell,mdBlockquote,mdCodeDelim
 syn region mdCodeBlock start=/\\\@<!```/ end=/\\\@<!```/  keepend contains=@NoSpell,mdBlockquote,mdCodeBlockPython,mdCodeBlockJulia,mdCodeBlockC,mdCodeDelim
+
+syn match mdCodeDelim /\\\@<!\`\(``.*\)\=/ contained conceal
 
 if exists('b:current_syntax')
     unlet b:current_syntax
