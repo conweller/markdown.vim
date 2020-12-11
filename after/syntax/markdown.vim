@@ -57,7 +57,6 @@ syn match mdCodeDelim /\\\@<!\`\+\(\s\+.*\)\=/ contained conceal
 
 syn region mdCode start=/\\\@<!`/ end=/\\\@<!`/  keepend contains=@NoSpell,mdBlockquote,mdCodeDelim
 syn region mdCodeBlock start=/\\\@<!```/ end=/\\\@<!```/  keepend contains=@NoSpell,mdBlockquote,mdCodeBlockPython,mdCodeBlockJulia,mdCodeBlockC,mdCodeDelim
-syn match mdCodeDelim /\\\@<!\`/ conceal contained
 
 if exists('b:current_syntax')
     unlet b:current_syntax
