@@ -5,14 +5,6 @@ syn sync minlines=100
 syn sync maxlines=200
 
 
-syn region mdGridTable start=/^$\n^\(+\+-\+\)\++$/ end=/^\(+\+-\+\)\++\n^$\|\%$/ contains=mdGridBar,mdGridLine keepend
-
-syn match mdGridLine /^\(+\+\(-\|=\)\+\)\++$/ contained contains=mdGridPlus,mdGridMinus,mdGridEquals
-syn match mdGridBar /\\\@<!|/
-syn match mdGridPlus /\\\@<!+/
-syn match mdGridMinus /\\\@<!-/
-syn match mdGridEquals /\\\@<!=/
-
 syn match mdBlockquote  /\(^\s*\zs>\ze \|^\s*\zs>$\)/
 syn match mdTodo  /\(\<TODO\>\|\<FIXME\>\|\<XXX\>\)/
 syn match mdDone  /\(\<DONE\>\)/
@@ -91,9 +83,10 @@ let b:current_syntax = 'markdown'
 
 hi def link mdLink htmlLink
 hi def link mdRawLink mdLink
-hi def link mdNewline Operator
-hi def link mdDefOperator Operator
-hi def link mdEmphOperator Operator
+hi def link mdOperator Operator
+hi def link mdNewline mdOperator
+hi def link mdDefOperator mdOperator
+hi def link mdEmphOperator mdOperator
 hi def link mdBlockquote Comment
 hi def link mdBold htmlBold
 hi def link mdItalic htmlItalic
@@ -105,18 +98,14 @@ hi def link mdStarted Todo
 hi def link mdCode String
 hi def link mdCodeBlock mdCode
 hi def link mdH1 htmlH1
-hi def link mdHeaderSymbol operator
+hi def link mdHeaderSymbol mdOperator
 hi def link mdMathBlock mdMath
 hi def link mdCodeMathBlock mdMath
 hi def link mdMath Type
-hi def link mdBullet Operator
-hi def link mdMathDelim Operator
-hi def link mdCodeDelim Operator
+hi def link mdBullet mdOperator
+hi def link mdMathDelim mdOperator
+hi def link mdCodeDelim mdOperator
 hi def link mdDefinition htmlBoldItalic
-hi def link mdGridBar Comment
-hi def link mdGridMinus mdGridBar
-hi def link mdGridPlus mdGridBar
-hi def link mdGridEquals mdGridBar
 
 
 let b:current_syntax = 'markdown'
