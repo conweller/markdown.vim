@@ -11,4 +11,3 @@ setlocal textwidth=72
 setlocal wrapmargin=0
 setlocal iskeyword-=$
 setlocal breakindent
-setlocal lbr

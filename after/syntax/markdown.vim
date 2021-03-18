@@ -8,7 +8,7 @@ syn sync maxlines=200
 syn match mdBlockquote  /\(^\s*\zs>\ze \|^\s*\zs>$\)/
 syn match mdTodo  /\(\<TODO\>\|\<FIXME\>\|\<XXX\>\)/
 syn match mdDone  /\(\<DONE\>\)/
-syn match mdStarted  /\(\<STARTED\>\)/
+syn match mdStarted  /\(\<PROG\>\)/
 
 syn match mdRawLink  /\\\@<!<[^<>]*\\\@<!>/ contains=@NoSpell,mdBlockquote
 
