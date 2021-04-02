@@ -8,7 +8,6 @@ syn sync maxlines=200
 syn match mdBlockquote  /\(^\s*\zs>\ze \|^\s*\zs>$\)/
 syn match mdTodo  /\(\<TODO\>\|\<FIXME\>\|\<XXX\>\)/
 syn match mdDone  /\(\<DONE\>\)/
-syn match mdStarted  /\(\<PROG\>\)/
 
 syn match mdRawLink  /\\\@<!<[^<>]*\\\@<!>/ contains=@NoSpell,mdBlockquote
 
@@ -22,7 +21,7 @@ syn match mdDefOperator  /^\s*:\s/ contained
 
 syn match mdEmphOperator contained /\\\@<!\*/ conceal
 
-syn region mdComment start=/^\s*\\\@<!<!--\s\=/ end=/\s\=-->/  keepend  contains=mdTodo,mdDone,mdStarted,@Spell
+syn region mdComment start=/^\s*\\\@<!<!--\s\=/ end=/\s\=-->/  keepend  contains=mdTodo,mdDone,@Spell
 
 syn region mdItalic start=/\\\@<!\*\ze\S/ end=/\S\zs\\\@<!\*/  keepend contains=mdEmphOperator,mdBlockquote,@Spell,mdMath
 syn region mdBold start=/\\\@<!\*\*\ze\S/ end=/\S\zs\\\@<!\*\*/  keepend contains=mdEmphOperator,mdBlockquote,@Spell,mdMath
@@ -31,7 +30,7 @@ syn region mdBoldItalic start=/\\\@<!\*\*\*\ze\S/ end=/\S\zs\\\@<!\*\*\*/  keepe
 
 
 for i in range(1, 7)
-    exe 'syn match mdH'.i.' /^'.repeat('#', i).' .*$/  keepend  contains=mdHeaderSymbol,mdMath,mdBoldItalic,mdItalic,mdBold,mdCode,@Spell,mdTodo,mdDone,mdStarted'
+    exe 'syn match mdH'.i.' /^'.repeat('#', i).' .*$/  keepend  contains=mdHeaderSymbol,mdMath,mdBoldItalic,mdItalic,mdBold,mdCode,@Spell,mdTodo,mdDone'
     if i > 1
         exe 'hi def link mdH'.i.' mdH1'
     end
@@ -86,7 +85,7 @@ hi def link mdRawLink mdLink
 hi def link mdOperator Operator
 hi def link mdNewline mdOperator
 hi def link mdDefOperator mdOperator
-hi def link mdEmphOperator mdOperator
+hi def link mdEmphOperator Normal
 hi def link mdBlockquote Comment
 hi def link mdBold htmlBold
 hi def link mdItalic htmlItalic
@@ -94,17 +93,16 @@ hi def link mdBoldItalic htmlBoldItalic
 hi def link mdComment Comment
 hi def link mdTodo Todo
 hi def link mdDone Todo
-hi def link mdStarted Todo
 hi def link mdCode String
 hi def link mdCodeBlock mdCode
 hi def link mdH1 htmlH1
-hi def link mdHeaderSymbol mdOperator
+hi def link mdHeaderSymbol mdH1
 hi def link mdMathBlock mdMath
 hi def link mdCodeMathBlock mdMath
 hi def link mdMath Type
 hi def link mdBullet mdOperator
-hi def link mdMathDelim mdOperator
-hi def link mdCodeDelim mdOperator
+hi def link mdMathDelim mdMath
+hi def link mdCodeDelim mdCode
 hi def link mdDefinition htmlBoldItalic
 
 
