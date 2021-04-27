@@ -11,7 +11,7 @@ syn match mdDone  /\(\<DONE\>\)/
 
 syn match mdRawLink  /\\\@<!<[^<>]*\\\@<!>/ contains=@NoSpell,mdBlockquote
 
-syn match mdLink  /\\\@<!\[[^\]]*\_[^\]]*\\\@<!\]([^)]*\\\@<!)/ contains=@NoSpell,mdBlockquote
+syn match mdLink  /\\\@<!\[.\{-}\_.\{-}\\\@<!\](.*\\\@<!)/ contains=@NoSpell,mdBlockquote
 
 syn match mdBullet  /^\(\s*>\=\s*\(+\|-\|\*\|\a\.\|\A\.\|\d\.\)\s\)\+/ contains=mdBlockquote
 syn match mdNewline  /\\$/
@@ -23,9 +23,9 @@ syn match mdEmphOperator contained /\\\@<!\*/ conceal
 
 syn region mdComment start=/^\s*\\\@<!<!--\s\=/ end=/\s\=-->/  keepend  contains=mdTodo,mdDone,@Spell
 
-syn region mdItalic start=/\\\@<!\*\ze\S/ end=/\S\zs\\\@<!\*/  keepend contains=mdEmphOperator,mdBlockquote,@Spell,mdMath
-syn region mdBold start=/\\\@<!\*\*\ze\S/ end=/\S\zs\\\@<!\*\*/  keepend contains=mdEmphOperator,mdBlockquote,@Spell,mdMath
-syn region mdBoldItalic start=/\\\@<!\*\*\*\ze\S/ end=/\S\zs\\\@<!\*\*\*/  keepend contains=mdEmphOperator,mdBlockquote,@Spell,mdMath
+syn region mdItalic start=/\\\@<!\*\ze\S/ end=/\S\zs\\\@<!\*/  keepend contains=mdBlockquote,@Spell,mdMath
+syn region mdBold start=/\\\@<!\*\*\ze\S/ end=/\S\zs\\\@<!\*\*/  keepend contains=mdBlockquote,@Spell,mdMath
+syn region mdBoldItalic start=/\\\@<!\*\*\*\ze\S/ end=/\S\zs\\\@<!\*\*\*/  keepend contains=mdBlockquote,@Spell,mdMath
 
 
 
