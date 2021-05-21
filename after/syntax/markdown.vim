@@ -13,7 +13,7 @@ syn match mdRawLink  /\\\@<!<[^<>]*\\\@<!>/ contains=@NoSpell,mdBlockquote
 
 syn match mdLink  /\\\@<!\[.\{-}\_.\{-}\\\@<!\](.*\\\@<!)/ contains=@NoSpell,mdBlockquote
 
-syn match mdBullet  /^\(\s*>\=\s*\(+\|-\|\*\|\a\.\|\A\.\|\d\.\)\s\)\+/ contains=mdBlockquote
+syn match mdBullet  /^\(\s*>\=\s*\(+\|-\|\*\|\a\.\|\A\.\|\d\+\.\)\s\)\+/ contains=mdBlockquote
 syn match mdNewline  /\\$/
 
 syn match mdDefinition  /^\s*\zs.*\n\s*:\s/ contains=mdDefOperator,@Spell
