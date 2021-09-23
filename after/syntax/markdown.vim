@@ -11,13 +11,11 @@ syn match mdDone  /\(\<DONE\>\)/
 
 syn match mdRawLink  /\\\@<!<[^<>]*\\\@<!>/ contains=@NoSpell,mdBlockquote
 
-syn match mdLink  /\\\@<!\[.\{-}\_.\{-}\\\@<!\](.*\\\@<!)/ contains=@NoSpell,mdBlockquote
+syn match mdLink  /\\\@<!\[\([^[]\|\r\|\n\|\\\[\)\{-}\\\@<!\](.*\\\@<!)/ contains=@NoSpell,mdBlockquote
 
 syn match mdBullet  /^\(\s*>\=\s*\(+\|-\|\*\|\a\.\|\A\.\|\d\+\.\)\s\)\+/ contains=mdBlockquote
 syn match mdNewline  /\\$/
 
-syn match mdDefinition  /^\s*\zs.*\n\s*:\s/ contains=mdDefOperator,@Spell
-syn match mdDefOperator  /^\s*:\s/ contained
 
 syn match mdEmphOperator contained /\\\@<!\*/ conceal
 
@@ -30,12 +28,12 @@ syn region mdBoldItalic start=/\\\@<!\*\*\*\ze\S/ end=/\S\zs\\\@<!\*\*\*/  keepe
 
 
 for i in range(1, 7)
-    exe 'syn match mdH'.i.' /^'.repeat('#', i).' .*$/  keepend  contains=mdHeaderSymbol,mdMath,mdBoldItalic,mdItalic,mdBold,mdCode,@Spell,mdTodo,mdDone'
+    exe 'syn match mdH'.i.' /^'.repeat('#', i).' .*$/  keepend  contains=mdMath,mdBoldItalic,mdItalic,mdBold,mdCode,@Spell,mdTodo,mdDone'
     if i > 1
-        exe 'hi def link mdH'.i.' mdH1'
+        exe 'hi def link mdH'.i.' htmlH'.i
     end
 endfor
-syn match mdHeaderSymbol  contained /#/
+" syn match mdHeaderSymbol  contained /#/
 
 
 
@@ -47,39 +45,16 @@ syn region mdCodeMathBlock start=/\\\@<!```{=tex}/  end=/\\\@<!```/ keepend cont
 syn match mdMathDelim /\\\@<!\$/ conceal contained
 
 syn region mdCode start=/\\\@<!`/ end=/\\\@<!`/  keepend contains=@NoSpell,mdBlockquote,mdCodeDelim
-syn region mdCodeBlock start=/\\\@<!```/ end=/\\\@<!```/  keepend contains=@NoSpell,mdBlockquote,mdCodeBlockPython,mdCodeBlockJulia,mdCodeBlockC,mdCodeDelim
+syn region mdCodeBlock start=/\\\@<!```/ end=/\\\@<!```/  keepend contains=@NoSpell,mdBlockquote,mdCodeDelim
 
 syn match mdCodeDelim /\\\@<!\`\(``.*\)\=/ contained conceal
 
-if exists('b:current_syntax')
-    unlet b:current_syntax
-end
-syn include @Python syntax/python.vim
-syn region mdCodeBlockPython contained start=/\\\@<!```\s*python3\=\zs$/ end=/\ze\\\@<!```/  contains=mdBlockquote,@Python
-let b:current_syntax = 'markdown'
+syn region mdFrontmatter start=/\%1l^---\+$/ end=/^---\+$/ keepend contains=@NoSpell
 
-if exists('b:current_syntax')
-    unlet b:current_syntax
-end
-syn include @Julia syntax/julia.vim
-syn region mdCodeBlockJulia contained start=/\\\@<!```\s*julia\zs$/ end=/\ze\\\@<!```/  contains=@NoSpell,mdBlockquote,@Julia
-let b:current_syntax = 'markdown'
+syn match mdDefinition  /^\s*\zs.*\n\+\s*:\s/ contains=mdDefOperator,@Spell,mdItalic,mdBoldItalic,mdBold,mdCode,mdMath
+syn match mdDefOperator  /^\s*:\s/ contained
 
-if exists('b:current_syntax')
-    unlet b:current_syntax
-end
-syn include @C syntax/c.vim
-syn region mdCodeBlockC contained start=/\\\@<!```\s*c\zs$/ end=/\ze\\\@<!```/  contains=@NoSpell,mdBlockquote,@C
-let b:current_syntax = 'markdown'
-
-if exists('b:current_syntax')
-    unlet b:current_syntax
-end
-syn include @Yaml syntax/yaml.vim
-syn region mdFrontmatter start=/\%1l^---\+$/ end=/^---\+$/ keepend contains=@NoSpell,@Yaml
-let b:current_syntax = 'markdown'
-
-
+hi def link mdFrontmatter comment
 hi def link mdLink htmlLink
 hi def link mdRawLink mdLink
 hi def link mdOperator Operator
