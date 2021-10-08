@@ -37,7 +37,6 @@ endfor
 
 
 
-" syn include @Tex syntax/tex.vim
 
 syn region mdMath start=/\\\@<!\$/ end=/\\\@<!\$/ keepend contains=mdBlockquote,mdMathDelim,mdMathBold
 syn region mdMathBlock start=/\\\@<!\$\$/ end=/\\\@<!\$\$/ keepend contains=mdBlockquote,mdMathDelim,mdMathBold
@@ -49,7 +48,8 @@ syn region mdCodeBlock start=/\\\@<!```/ end=/\\\@<!```/  keepend contains=@NoSp
 
 syn match mdCodeDelim /\\\@<!\`\(``.*\)\=/ contained conceal
 
-syn region mdFrontmatter start=/\%1l^---\+$/ end=/^---\+$/ keepend contains=@NoSpell
+syn include @Yaml syntax/yaml.vim
+syn region mdFrontmatter start=/\%1l^---\+$/ end=/^---\+$/ keepend contains=@NoSpell,@Yaml
 
 syn match mdDefinition  /^\s*\zs.*\n\+\s*:\s/ contains=mdDefOperator,@Spell,mdItalic,mdBoldItalic,mdBold,mdCode,mdMath
 syn match mdDefOperator  /^\s*:\s/ contained
