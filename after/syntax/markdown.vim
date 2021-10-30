@@ -25,22 +25,18 @@ syn region mdItalic start=/\\\@<!\*\ze\S/ end=/\S\zs\\\@<!\*/  keepend contains=
 syn region mdBold start=/\\\@<!\*\*\ze\S/ end=/\S\zs\\\@<!\*\*/  keepend contains=mdBlockquote,@Spell,mdMath
 syn region mdBoldItalic start=/\\\@<!\*\*\*\ze\S/ end=/\S\zs\\\@<!\*\*\*/  keepend contains=mdBlockquote,@Spell,mdMath
 
-
-
 for i in range(1, 7)
     exe 'syn match mdH'.i.' /^'.repeat('#', i).' .*$/  keepend  contains=mdMath,mdBoldItalic,mdItalic,mdBold,mdCode,@Spell,mdTodo,mdDone'
     if i > 1
         exe 'hi def link mdH'.i.' htmlH'.i
     end
 endfor
-" syn match mdHeaderSymbol  contained /#/
 
 
 
 
 syn region mdMath start=/\\\@<!\$/ end=/\\\@<!\$/ keepend contains=mdBlockquote,mdMathDelim,mdMathBold
 syn region mdMathBlock start=/\\\@<!\$\$/ end=/\\\@<!\$\$/ keepend contains=mdBlockquote,mdMathDelim,mdMathBold
-syn region mdCodeMathBlock start=/\\\@<!```{=tex}/  end=/\\\@<!```/ keepend contains=mdBlockquote,mdMathDelim,mdMathBold
 syn match mdMathDelim /\\\@<!\$/ conceal contained
 
 syn region mdCode start=/\\\@<!`/ end=/\\\@<!`/  keepend contains=@NoSpell,mdBlockquote,mdCodeDelim
@@ -71,9 +67,7 @@ hi def link mdDone Todo
 hi def link mdCode String
 hi def link mdCodeBlock mdCode
 hi def link mdH1 htmlH1
-hi def link mdHeaderSymbol mdH1
 hi def link mdMathBlock mdMath
-hi def link mdCodeMathBlock mdMath
 hi def link mdMath Type
 hi def link mdBullet mdOperator
 hi def link mdMathDelim mdMath
