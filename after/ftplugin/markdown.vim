@@ -11,4 +11,29 @@ setlocal textwidth=72
 setlocal wrapmargin=0
 setlocal iskeyword-=$
 setlocal matchpairs=(:),{:},[:]
+setlocal foldexpr=MdFold()
 
+
+function! MdFold() abort
+  let line = getline(v:lnum)
+
+  if line =~# '^#\+ ' && s:NotCodeBlock(v:lnum)
+    return ">" . match(line, ' ')
+  endif
+
+  " let nextline = getline(v:lnum + 1)
+  " if (line =~ '^.\+$') && (nextline =~ '^=\+$') && s:NotCodeBlock(v:lnum + 1)
+  "   return ">1"
+  " endif
+
+  " if (line =~ '^.\+$') && (nextline =~ '^-\+$') && s:NotCodeBlock(v:lnum + 1)
+  "   return ">2"
+  " endif
+
+  return "="
+endfunction
+
+
+function! s:NotCodeBlock(lnum) abort
+  return synIDattr(synID(v:lnum, 1, 1), 'name') !=# 'mdCodeBlock'
+endfunction

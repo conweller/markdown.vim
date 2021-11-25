@@ -11,7 +11,8 @@ syn match mdDone  /\(\<DONE\>\)/
 
 syn match mdRawLink  /\\\@<!<[^<>]*\\\@<!>/ contains=@NoSpell,mdBlockquote
 
-syn match mdLink  /\\\@<!\[\([^[]\|\r\|\n\|\\\[\)\{-}\\\@<!\](.*\\\@<!)/ contains=@NoSpell,mdBlockquote
+syn match mdLink  /\\\@<!\[\([^[]\|\r\|\n\|\\\[\)\{-}\\\@<!\](.*\\\@<!)/ contains=@NoSpell,mdBlockquote,mdLinkLeadingSpace
+syn match mdLinkLeadingSpace /^\s*/ contained
 
 syn match mdBullet  /^\(\s*>\=\s*\(+\|-\|\*\|\a\.\|\A\.\|\d\+\.\)\s\)\+/ contains=mdBlockquote
 syn match mdNewline  /\\$/
@@ -33,22 +34,29 @@ for i in range(1, 7)
 endfor
 
 
+syn include @Tex syntax/tex.vim
 
 
-syn region mdMath start=/\\\@<!\$/ end=/\\\@<!\$/ keepend contains=mdBlockquote,mdMathDelim,mdMathBold
-syn region mdMathBlock start=/\\\@<!\$\$/ end=/\\\@<!\$\$/ keepend contains=mdBlockquote,mdMathDelim,mdMathBold
-syn match mdMathDelim /\\\@<!\$/ conceal contained
+syn region mdMath start=/\\\@<!\$/ end=/\\\@<!\$/ keepend contains=mdBlockquote,mdMathDelim,mdMathBold,@Tex
+syn region mdMathBlock start=/\\\@<!\$\$/ end=/\\\@<!\$\$/ keepend contains=mdBlockquote,mdMathDelim,mdMathBold,@Tex
 
 syn region mdCode start=/\\\@<!`/ end=/\\\@<!`/  keepend contains=@NoSpell,mdBlockquote,mdCodeDelim
 syn region mdCodeBlock start=/\\\@<!```/ end=/\\\@<!```/  keepend contains=@NoSpell,mdBlockquote,mdCodeDelim
 
 syn match mdCodeDelim /\\\@<!\`\(``.*\)\=/ contained conceal
 
+unlet! b:current_syntax
+
 syn include @Yaml syntax/yaml.vim
 syn region mdFrontmatter start=/\%1l^---\+$/ end=/^---\+$/ keepend contains=@NoSpell,@Yaml
 
+
+unlet! b:current_syntax
+
 syn match mdDefinition  /^\s*\zs.*\n\+\s*:\s/ contains=mdDefOperator,@Spell,mdItalic,mdBoldItalic,mdBold,mdCode,mdMath
 syn match mdDefOperator  /^\s*:\s/ contained
+
+let b:current_syntax = 'markdown'
 
 hi def link mdFrontmatter comment
 hi def link mdLink htmlLink
@@ -73,6 +81,5 @@ hi def link mdBullet mdOperator
 hi def link mdMathDelim mdMath
 hi def link mdCodeDelim mdCode
 hi def link mdDefinition htmlBoldItalic
-
 
 let b:current_syntax = 'markdown'
