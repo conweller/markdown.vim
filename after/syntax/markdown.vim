@@ -11,11 +11,13 @@ syn match mdDone  /\(\<DONE\>\)/
 
 syn match mdRawLink  /\\\@<!<[^<>]*\\\@<!>/ contains=@NoSpell,mdBlockquote
 
-syn match mdLink  /\\\@<!\[\([^[]\|\r\|\n\|\\\[\)\{-}\\\@<!\](.*\\\@<!)/ contains=@NoSpell,mdBlockquote,mdLinkLeadingSpace
+syn match mdLink  /\\\@<!\[\([^[]\|\r\|\n\|\\\[\)\{-}\\\@<!\](.\{-}\\\@<!)/ contains=@NoSpell,mdBlockquote,mdLinkLeadingSpace
 syn match mdLinkLeadingSpace /^\s*/ contained
 
 syn match mdBullet  /^\(\s*>\=\s*\(+\|-\|\*\|\a\.\|\A\.\|\d\+\.\)\s\)\+/ contains=mdBlockquote
 syn match mdNewline  /\\$/
+
+syn match mdListStuff  /^-\s*\[[x| ]\]/ contains=mdBullet,mdListTodo,mdListDone
 
 
 syn match mdEmphOperator contained /\\\@<!\*/ conceal
